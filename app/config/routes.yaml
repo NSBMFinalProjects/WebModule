@@ -4,3 +4,10 @@
 #index:
 #    path: /
 #    defaults: { _controller: 'App\Controller\DefaultController::index' }
+
+home:
+  path: /
+  defaults: {_controller: 'App\Controller\General::home'}
+contact:
+  path: /contact
+  defaults: {_controller: 'App\Controller\General::contact'}
