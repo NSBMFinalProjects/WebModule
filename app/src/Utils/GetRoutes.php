@@ -15,7 +15,7 @@ class GetRoutes
         if (str_ends_with(haystack: $path, needle: '/')) {
             return self::$routes_path . $path . 'index.php';
         } else {
-            return self::$routes_path . $path;
+            return self::$routes_path . $path . '.php';
         }
     }
 }
