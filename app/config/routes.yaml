@@ -5,9 +5,22 @@
 #    path: /
 #    defaults: { _controller: 'App\Controller\DefaultController::index' }
 
+#
+# Default paths
+#
 home:
   path: /
   defaults: {_controller: 'App\Controller\General::home'}
 contact:
   path: /contact
   defaults: {_controller: 'App\Controller\General::contact'}
+#
+# OAuth paths
+#
+# Github
+github_redirect:
+  path: /oauth/github/redirect
+  defaults: {_controller: 'App\Controller\OAuth\Github::github'}
+github_callback:
+  path: /oauth/github/callback
+  defaults: {_controller: 'App\Controller\OAuth\Github::callback'}
