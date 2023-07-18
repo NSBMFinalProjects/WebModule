@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <link rel="stylesheet" href="css/contactUs.css" />
+  </head>
+  <body>
+    <h1>GET IN TOUCH WITH THE OUR TEAM</h1>
+
+    <form action="contactUs.php">
+      <table id="tblContactUs">
+        <tr>
+          <td>
+            <label>WHAT CAN WE HELP WITH?*</label>
+          </td>
+          <td colspan="4"><input type="text" id="cntWhat" size="90" /></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label>NAME *</label>
+          </td>
+          <td>
+            <input type="text" name="cntName" id="cntName" size="40" />
+          </td>
+          <td>
+            <label>Email*</label>
+          </td>
+          <td>
+            <input type="text" name="cntEmail" id="cntEmail" size="40" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>MESSAGE*</label>
+          </td>
+          <td colspan="3">
+            <textarea
+              name="cntMessage"
+              id="cntMessage"
+              cols="30"
+              rows="5"
+              size="100"
+            ></textarea>
+          </td>
+        </tr>
+      </table>
+      <input type="submit" value="send" />
+    </form>
+  </body>
+</html>
