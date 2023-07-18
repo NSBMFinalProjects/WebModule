@@ -13,16 +13,16 @@
 <!-- Start of the table When updating search for here -->
 
 | Page logical name | The route path | Description | Should the user be authenticated ? |
-| --- | --- | --- | --- |
-| Home page (Without login) | / | This is the page that is shown to the user if the user is not logged in when the user enters the domain of the website | No |
-| Question pag (With or without login) | / → If Logged in
-/question → If not logged in or not (Does not really matter) | This page contains the current question that is availabel for today with the relevant countdown and the with the ability to pick the correct answer from the list of answers | No |
-| Leaderboard | /leaderboard | This page contains the leaderboard for the current question. The user muse not be logged in to view this page. If there is no question to show for today then fallback to the previous question | No |
-|  | /questions/N/leaderboard | This shows the leaderboard for the given question number (The question number is denoted by N ). Say for example if the user wants to view the question number 6 then the path that the user should visit will be denoted as /questions/6/leaderboard | No |
-| Old questions | /questions or /calendar | This route shows the user all the previous questions that are provided within the platfrom | No |
-| View Old question | /questions/N | N is the number of the question that you need to watch | No |
-| About US | /about | Contains the about us of the dev team and out university | No |
-| Contact US | /contactus | Contains the contact us page. This page allows users to inquiry the dev team for further clarifications about the platform or to provide some meaningful suggestions | No |
+| :--- | :--- | :--- | :--- |
+| Home page (Without Login) | `/` | This is the  page that is shown to the user when the user visits the website domain without loggin in | No |
+| Question page | `/` => Logged In <br><br> `/question` => Login state does not matter | This page contains the question that is shown for today this is the default page if teh website is visited from a logged in users perspective. If there is not question to be shown today then it will display please come again tommorow| No |
+| Leadeboard | `/leaderboard` | This page contains the leaderboard for the current question (Todays question) If there is no question available for the day fallback to the previous page or show some text indicating that there is no question for the day | No |
+| | `/questions/*N*/leaderboard` | This page contains the leaderboard that was available to the given question number. Here N is the number of the question that the leaderboard needs to be shown.Say for example `questions/6/leaderboard` will show the leaderboard for the question number 6 | No |
+| Old questions | `/questions` or `/calendar` | Contains all the old questions that have been previously display within our platfrom. If time permits this page will contain a pagination to view the questions back in history with better efficency | No |
+| View old questions | `/questions/*N*` | Contains old questions that are provided in the platfrom. Here N is the question number of the question that needs to be viewed | No |
+| About Us | `/about-us` | Contains details about our website, our team and our university | No |
+| Contact US | `/contact-us` | Contains a from for users visiting our site to contact us (The dev team) for furthear feature additions, inquires and etc ... | No |
+
 
 <!-- End of the table -->
 
