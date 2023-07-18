@@ -8,25 +8,23 @@
 
 - Users will have to log in/Register with their GitHub accounts to provide an answer to the question that is displayed. (The programming language in which the user is writing the code will not matter as we will only evaluate the output of the code (The output of a program does not depend on the language that it is written in))
 
-- There will be at least 7 pages on this website and they will be updated below as we understand more and more about what our end product will be
-  - Home page
-    - This page will only be shown to the user if only they are not logged in
+- About the pages of the platfrom (Will be updated keep in touch 😉)
 
-  - Question page
-    - This page will be shown to the user if and only if the user is logged in
+<!-- Start of the table When updating search for here -->
 
-  - Contact Us page
-    - The end users of our site will use this page to contact us to get more information about the site or provide some meaningful insights related to our site
+| Page logical name | The route path | Description | Should the user be authenticated ? |
+| --- | --- | --- | --- |
+| Home page (Without login) | / | This is the page that is shown to the user if the user is not logged in when the user enters the domain of the website | No |
+| Question pag (With or without login) | / → If Logged in
+/question → If not logged in or not (Does not really matter) | This page contains the current question that is availabel for today with the relevant countdown and the with the ability to pick the correct answer from the list of answers | No |
+| Leaderboard | /leaderboard | This page contains the leaderboard for the current question. The user muse not be logged in to view this page. If there is no question to show for today then fallback to the previous question | No |
+|  | /questions/N/leaderboard | This shows the leaderboard for the given question number (The question number is denoted by N ). Say for example if the user wants to view the question number 6 then the path that the user should visit will be denoted as /questions/6/leaderboard | No |
+| Old questions | /questions or /calendar | This route shows the user all the previous questions that are provided within the platfrom | No |
+| View Old question | /questions/N | N is the number of the question that you need to watch | No |
+| About US | /about | Contains the about us of the dev team and out university | No |
+| Contact US | /contactus | Contains the contact us page. This page allows users to inquiry the dev team for further clarifications about the platform or to provide some meaningful suggestions | No |
 
-  - About Us page
-    - This page will be used to display information about us the devs who worked hard to make this site possible
-
-  - Old questions
-    - This page is used to show the users the old questions alongside their answer
-
-  - Old Questions leaderboard
-    - This page will show the leaderboard of the selected old question
-      For example, say that the user selected yesterday's question then this page will show the leader board of the users who submitted yesterday's questions first
+<!-- End of the table -->
 
 ## Why languages/frameworks are we using?
 
