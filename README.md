@@ -15,7 +15,13 @@
 | Page logical name | The route path | Description | Should the user be authenticated ? |
 | :--- | :--- | :--- | :--- |
 | Home page (Without Login) | `/` | This is the  page that is shown to the user when the user visits the website domain without loggin in | No |
-| Question page | `/` => Logged In <br> `/question` => Login state does not matter | This page contains the question that is shown for today this is the default page if teh website is visited from a logged in users perspective. If there is not question to be shown today then it will display please come again tommorow
+| Question page | `/` => Logged In <br><br> `/question` => Login state does not matter | This page contains the question that is shown for today this is the default page if teh website is visited from a logged in users perspective. If there is not question to be shown today then it will display please come again tommorow| No |
+| Leadeboard | `/leaderboard` | This page contains the leaderboard for the current question (Todays question) If there is no question available for the day fallback to the previous page or show some text indicating that there is no question for the day | No |
+| | `/questions/*N*/leaderboard` | This page contains the leaderboard that was available to the given question number. Here N is the number of the question that the leaderboard needs to be shown.Say for example `questions/6/leaderboard` will show the leaderboard for the question number 6 | No |
+| Old questions | `/questions` or `/calendar` | Contains all the old questions that have been previously display within our platfrom. If time permits this page will contain a pagination to view the questions back in history with better efficency | No |
+| View old questions | `/questions/*N*` | Contains old questions that are provided in the platfrom. Here N is the question number of the question that needs to be viewed | No |
+| About Us | `/about-us` | Contains details about our website, our team and our university | No |
+| Contact US | `/contact-us` | Contains a from for users visiting our site to contact us (The dev team) for furthear feature additions, inquires and etc ... | No |
 
 
 <!-- End of the table -->
