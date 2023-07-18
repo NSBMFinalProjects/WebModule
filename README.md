@@ -10,6 +10,8 @@
 
 - About the pages of the platfrom (Will be updated keep in touch 😉)
 
+<!-- Start of the table When updating search for here -->
+
 | Page logical name | The route path | Description | Should the user be authenticated ? |
 | --- | --- | --- | --- |
 | Home page (Without login) | / | This is the page that is shown to the user if the user is not logged in when the user enters the domain of the website | No |
@@ -21,6 +23,8 @@
 | View Old question | /questions/N | N is the number of the question that you need to watch | No |
 | About US | /about | Contains the about us of the dev team and out university | No |
 | Contact US | /contactus | Contains the contact us page. This page allows users to inquiry the dev team for further clarifications about the platform or to provide some meaningful suggestions | No |
+
+<!-- End of the table -->
 
 ## Why languages/frameworks are we using?
 
