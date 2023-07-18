@@ -5,8 +5,14 @@ table.tblContactUs {
 
 h1.a {
   text-align: left;
+  border-bottom-style: solid;
 }
 
 input.btnsend {
   text-align: right;
+  border-radius: 10;
+}
+body {
+  background-color: rgb(165, 155, 255);
+  padding: 5px;
 }
