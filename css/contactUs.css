@@ -2,3 +2,11 @@ table.tblContactUs {
   table-layout: auto;
   width: 100%;
 }
+
+h1.a {
+  text-align: left;
+}
+
+input.btnsend {
+  text-align: right;
+}
