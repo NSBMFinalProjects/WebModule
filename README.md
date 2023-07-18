@@ -9,6 +9,7 @@
 - Users will have to log in/Register with their GitHub accounts to provide an answer to the question that is displayed. (The programming language in which the user is writing the code will not matter as we will only evaluate the output of the code (The output of a program does not depend on the language that it is written in))
 
 - About the pages of the platfrom (Will be updated keep in touch 😉)
+
 | Page logical name | The route path | Description | Should the user be authenticated ? |
 | --- | --- | --- | --- |
 | Home page (Without login) | / | This is the page that is shown to the user if the user is not logged in when the user enters the domain of the website | No |
