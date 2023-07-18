@@ -78,5 +78,4 @@ class Github extends AbstractController
 
         return new Response(null, Response::HTTP_OK);
     }
-
 }
