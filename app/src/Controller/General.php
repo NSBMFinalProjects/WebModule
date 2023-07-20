@@ -13,7 +13,7 @@ class General extends AbstractController
     {
         // TODO: Check wehter the user is authenticated or not before making showing the home page to the user
         // if the user is authenticated then show him the questions page otherwise show him the promotional page
-        $is_authenticated = true;
+        $is_authenticated = false;
 
         if ($is_authenticated) {
             include GetRoutes::getPath('/question');
