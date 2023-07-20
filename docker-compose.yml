@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   web:
+    container_name: nginx
     image: nginx:1.25.1-alpine
     ports:
       - "8080:80"
@@ -10,6 +11,18 @@ services:
     links:
       - php-fpm
   php-fpm:
+    container_name: php
     build: docker/php-fpm
     volumes:
       - ./app:/var/www/html
+  postgres:
+    container_name: db
+    image: postgres:latest
+    ports:
+      - '6500:5432'
+    volumes:
+      - DB:/data/postgres
+    env_file:
+      - ./app/.env
+volumes:
+  DB:
