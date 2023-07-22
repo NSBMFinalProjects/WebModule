@@ -7,8 +7,10 @@ use App\Errors\DB\ConnectionError;
 use App\Errors\DB\DuplicateKey;
 use App\Errors\DB\InsufficentData;
 use App\Errors\DB\NotFound;
+use App\Errors\General\BadRequest;
 use App\Errors\General\InternalServerError;
 use Exception;
+use Fuel\Validation\Validator;
 use PDO;
 
 class User
@@ -27,6 +29,68 @@ class User
         if (!$this->db) {
             throw new ConnectionError();
         }
+    }
+
+    /**
+     * Validate the inputs for appropriate content
+     *
+     * @param stirng username The username of the user
+     * @param string display_name The display name of the user
+     * @param string photo_url The photo_url of the user
+     * @param stirng email The email address of the user
+     **/
+    public static function validate(string $username, string $display_name, string $photo_url, string | null $email = null): bool
+    {
+        $v = new Validator;
+
+        $v
+            ->addField("username", "username")
+
+            ->required()
+            ->minLength(3)
+            ->maxLength(15)
+
+            ->addField("display_name", "display_name")
+
+            ->required()
+            ->minLength(4)
+            ->maxLength(100)
+
+            ->addField("photo_url", "photo_url")
+          
+            ->required()
+            ->url()
+
+            ->addField("email", "email")
+
+            ->email();
+
+        $data = array(
+          'username' => $username,
+          'display_name' => $display_name,
+          'photo_url' => $photo_url,
+          'email' => $email
+        );
+
+        $result = $v->run($data);
+        /* var_dump($result->getErrors()); */
+
+        return $result->isValid();
+    }
+
+    /**
+     * validate the username
+     *
+     * @param  stirng username The username of the user
+     * @return bool
+     **/
+    public static function valiateUsername(string $username): bool
+    {
+        $v = new Validator;
+        $v->addField("username", "username")->required()->minLength(3)->maxLength(15);
+        $result = $v->run(array('username' => $username));
+
+        return $result->isValid();
     }
 
     /**
@@ -52,6 +116,11 @@ class User
                 throw new NotFound();
             }
         } else {
+            $isValid = self::valiateUsername($username);
+            if (!$isValid) {
+                throw new BadRequest();
+            }
+
             $stmt = $this->db->prepare("SELECT * FROM users WHERE username=?");
             $stmt->execute([$username]);
             $user = $stmt->fetch();
@@ -79,6 +148,10 @@ class User
      **/
     public function setUser(string $username, string $display_name, string $photo_url, ?string $email): void
     {
+        if (!self::validate($username, $display_name, $photo_url, $email)) {
+            throw new BadRequest();
+        }
+
         try {
             $stmt = $this->db->prepare("INSERT INTO users (username, display_name, photo_url, email) VALUES (:username, :display_name, :photo_url, :email)");
             $stmt->execute(
