@@ -144,9 +144,9 @@ class User
      * @param string username The username of the user
      * @param string display_name The display name of the user
      * @param string photo_url The photo URL of the user
-     * @param string email The email of the user
+     * @param ?string email The email of the user
      **/
-    public function setUser(string $username, string $display_name, string $photo_url, ?string $email): void
+    public function setUser(string $username, string $display_name, string $photo_url, ?string $email = null): void
     {
         if (!self::validate($username, $display_name, $photo_url, $email)) {
             throw new BadRequest();
