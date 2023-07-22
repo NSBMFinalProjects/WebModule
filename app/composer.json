@@ -5,6 +5,7 @@
         "php": ">=7.0.8",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "fuelphp/validation": "^0.1.1",
         "guzzlehttp/guzzle": "^7.0",
         "league/commonmark": "^2.4",
         "mongodb/mongodb": "^1.16",

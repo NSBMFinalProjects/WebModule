@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c52442fe010c3146c63a1ce76bea8066",
+    "content-hash": "6f43e57a82c601bf8c10699e87fd9ced",
     "packages": [
         {
             "name": "dflydev/dot-access-data",
@@ -80,6 +80,55 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.2"
             },
             "time": "2022-10-27T11:44:00+00:00"
+        },
+        {
+            "name": "fuelphp/validation",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fuelphp/validation.git",
+                "reference": "2ae62054c6fdb191542ac6e872bcca610a7b46f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fuelphp/validation/zipball/2ae62054c6fdb191542ac6e872bcca610a7b46f9",
+                "reference": "2ae62054c6fdb191542ac6e872bcca610a7b46f9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "codeception/codeception": "~2.0",
+                "codeception/mockery-module": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Fuel\\Validation\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "FuelPHP Development Team",
+                    "email": "team@fuelphp.com"
+                }
+            ],
+            "description": ".",
+            "homepage": "https://github.com/fuelphp/validation",
+            "keywords": [
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/fuelphp/validation/issues",
+                "source": "https://github.com/fuelphp/validation/tree/0.1.1"
+            },
+            "abandoned": true,
+            "time": "2016-11-25T16:35:22+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
