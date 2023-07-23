@@ -20,10 +20,10 @@ class Token
     /**
      * Create a new access token
      *
-     * @param  string user_id The ID of the user
+     * @param  string username The username of the user
      * @return string
      **/
-    public static function create(string $user_id): string
+    public static function create(string $username): string
     {
         $private_key = base64_decode($_ENV['ACCESS_TOKEN_PRIVATE_KEY']);
         $ttl = new DateInterval($_ENV['ACCESS_TOKEN_EXPIRED_IN']);
@@ -35,7 +35,7 @@ class Token
         $tokenUUID = Uuid::uuid4();
 
         $payload = [
-          'sub' => $user_id,
+          'sub' => $username,
           'token_uuid' => $tokenUUID->toString(),
           'exp' => $expires->getTimestamp(),
           'iat' => $now->getTimestamp(),
