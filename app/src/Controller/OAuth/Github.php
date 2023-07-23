@@ -2,11 +2,12 @@
 namespace App\Controller\OAuth;
 
 use App\Enums\Provider;
-use App\Errors\GithubAccessToken;
 use App\Models\User;
 use App\Utils\OAuth;
+use App\Utils\Token;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -78,24 +79,31 @@ class Github extends AbstractController
         $provider = Provider::GITHUB->value;
         $provider_id = $user['id'];
 
-        // TODO: Add The user data to the database and generate a token indicating that the user is properly logged in
-        // with the platfrom
-        echo "<h1><u>User details</u></h1>";
-        echo "The ID is       : " . $provider_id . '<br>';
-        echo "The username is : " . $username . '<br>';
-        echo "The PhotoURL is : " . $photo_url . '<br>';
-        echo "The name is     : " . $display_name . '<br>';
-        echo "The email is    : " . $email . '<br>';
-
         try {
             $newUser = new User;
-            if ($newUser->checkUsername($user['login'])) {
+            if ($newUser->checkUsername($username)) {
                 $newUser->setUser($username, $display_name, $photo_url, $provider, $provider_id, $email);
             }
         } catch (Exception $e) {
+            echo $e->getMessage();
             return new Response(null, $e->getCode());
         }
 
-        return new Response(null, Response::HTTP_OK);
+        $jwt = Token::create($username);
+
+        $res = new Response();
+        $cookie = new Cookie(
+            name: 'session',
+            value: $jwt,
+            expire: 0,
+            path: '/',
+            domain: 'localhost',
+            secure: false,
+            httpOnly: true
+        );
+        $res->headers->setCookie($cookie);
+        $res->sendHeaders();
+
+        return $this->redirectToRoute(route: 'home');
     }
 }
