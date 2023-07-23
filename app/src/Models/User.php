@@ -20,6 +20,8 @@ class User
     private $display_name;
     private $email;
     private $photo_url;
+    private $provider;
+    private $provider_id;
 
     private PDO $db;
 
@@ -84,13 +86,40 @@ class User
      * @param  stirng username The username of the user
      * @return bool
      **/
-    public static function valiateUsername(string $username): bool
+    public static function validateUsername(string $username): bool
     {
         $v = new Validator;
         $v->addField("username", "username")->required()->minLength(3)->maxLength(15);
         $result = $v->run(array('username' => $username));
 
         return $result->isValid();
+    }
+
+    /**
+     * Check wether the username of the given user is already occupied in the system
+     *
+     * @param  string usernaem The username of the user
+     * @return bool
+     **/
+    public function checkUsername(string $username): bool
+    {
+        try {
+            $isValid = self::validateUsername($username);
+            if (!$isValid) {
+                return false;
+            }
+
+            $stmt = $this->db->prepare("SELECT username FROM users WHERE username=?");
+            $stmt->execute([$username]);
+            $user = $stmt->fetch();
+            if (!$user) {
+                return true;
+            }
+
+            return false;
+        } catch (Exception $e) {
+            throw new InternalServerError(message: $e->getMessage());
+        }
     }
 
     /**
@@ -116,7 +145,7 @@ class User
                 throw new NotFound();
             }
         } else {
-            $isValid = self::valiateUsername($username);
+            $isValid = self::validateUsername($username);
             if (!$isValid) {
                 throw new BadRequest();
             }
@@ -134,6 +163,9 @@ class User
         $this->display_name = $user['display_name'];
         $this->photo_url = $user['photo_url'];
         $this->email = $user['email'];
+        $this->provider = $user['provider'];
+        $this->provider = $user['provider_id'];
+
         return;
 
     }
@@ -144,22 +176,26 @@ class User
      * @param string username The username of the user
      * @param string display_name The display name of the user
      * @param string photo_url The photo URL of the user
+     * @param string provider The name of the provider
+     * @param int provider_id The ID of the provider
      * @param ?string email The email of the user
      **/
-    public function setUser(string $username, string $display_name, string $photo_url, ?string $email = null): void
+    public function setUser(string $username, string $display_name, string $photo_url, string $provider, int $provider_id, ?string $email = null): void
     {
         if (!self::validate($username, $display_name, $photo_url, $email)) {
             throw new BadRequest();
         }
 
         try {
-            $stmt = $this->db->prepare("INSERT INTO users (username, display_name, photo_url, email) VALUES (:username, :display_name, :photo_url, :email)");
+            $stmt = $this->db->prepare("INSERT INTO users (username, display_name, photo_url, email, provider, provider_id) VALUES (:username, :display_name, :photo_url, :email, :provider, :provider_id)");
             $stmt->execute(
                 [
                 ':username' => $username,
                 ':display_name' => $display_name,
                 ':photo_url' => $photo_url,
-                ':email' => $email
+                ':email' => $email,
+                ':provider' => $provider,
+                ':provider_id' => $provider_id
                 ]
             );
 
@@ -220,10 +256,30 @@ class User
     /**
      * Get the email address of the user
      *
-     * @return string
+     * @return string | null
      **/
-    public function getEmail(): ?string
+    public function getEmail(): string | null
     {
         return $this->email ? $this->email : null;
+    }
+
+    /**
+     * Get the provider that the user has used to login
+     *
+     * @return string
+     **/
+    public function getProvider(): string
+    {
+        return $this->provider;
+    }
+
+    /**
+     * Get the provider ID given by the provider to the user upon login
+     *
+     * @return int
+     **/
+    public function getProviderID(): int
+    {
+        return $this->provider_id;
     }
 }
