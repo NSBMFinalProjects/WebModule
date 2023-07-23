@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Middleware\Auth;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +12,7 @@ class General extends AbstractController
     #[Route('/', name: 'home')]
     public function home(): Response
     {
-        // TODO: Check wehter the user is authenticated or not before making showing the home page to the user
-        // if the user is authenticated then show him the questions page otherwise show him the promotional page
-        $is_authenticated = true;
+        $is_authenticated = Auth::isAuthed();
 
         if ($is_authenticated) {
             include GetRoutes::getPath('/question');
