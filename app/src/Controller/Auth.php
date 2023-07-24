@@ -89,7 +89,6 @@ class Auth extends AbstractController
             return $this->redirectToRoute($state);
         }
 
-
         $res = new Response(null, status: Response::HTTP_OK);
         $res->headers->clearCookie('session', '/', 'localhost');
         $res->sendHeaders();
