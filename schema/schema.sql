@@ -8,6 +8,7 @@ CREATE TABLE users (
   email VARCHAR(255) UNIQUE,
   provider VARCHAR(50) NOT NULL,
   provider_id INT NOT NULL,
+  joined_at TIMESTAMP NOT NULL DEFAULT NOW(),
   PRIMARY KEY(ID)
 );
 
@@ -18,4 +19,13 @@ CREATE TABLE profiles (
   correct INT NOT NULL DEFAULT 0,
   PRIMARY KEY (ID),
   FOREIGN KEY (user_id) REFERENCES users(ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE questions (
+  ID uuid DEFAULT uuid_generate_v4(),
+  doc_id VARCHAR(30) NOT NULL UNIQUE,
+  attempts INT NOT NULL DEFAULT 0,
+  correct INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (ID)
 );
