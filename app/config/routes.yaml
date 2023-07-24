@@ -14,6 +14,12 @@ home:
 contact:
   path: /contact
   defaults: {_controller: 'App\Controller\General::contact'}
+logout:
+  path: /logout
+  defaults: {_controller: 'App\Controller\Auth::logout'}
+login:
+  path: /login
+  defaults: {_controller: 'App\Controller\OAuth\Github::github'}
 #
 # OAuth paths
 #
@@ -24,3 +30,10 @@ github_redirect:
 github_callback:
   path: /oauth/github/callback
   defaults: {_controller: 'App\Controller\OAuth\Github::callback'}
+#
+# API routes
+#
+# Auth (API routes releated to authentication)
+logout-api:
+  path: /api/auth/logout
+  defaults: {_controller: 'App\Controller\Auth::logout'}
