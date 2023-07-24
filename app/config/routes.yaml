@@ -37,6 +37,9 @@ github_callback:
 # API routes
 #
 # Auth (API routes releated to authentication)
+me-api:
+  path: /api/auth/me
+  defaults: {_controller: 'App\Controller\Auth::me'}
 logout-api:
   path: /api/auth/logout
   defaults: {_controller: 'App\Controller\Auth::logout'}
