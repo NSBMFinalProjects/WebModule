@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Connnections\Mongo;
 use App\Models\Question as AppQuestion;
 use Exception;
+use App\Enums\MongoCollections;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,7 +57,7 @@ class Question extends AbstractController
         );
 
         try {
-            $docID = $mongo->selectCollection('questions')->insertOne($document)->getInsertedId();
+            $docID = $mongo->selectCollection(MongoCollections::QUESTIONS->value)->insertOne($document)->getInsertedId();
             $newQuestion = new AppQuestion;
             $newQuestion->create($docID);
         } catch(Exception $e) {
