@@ -2,6 +2,7 @@
 namespace App\Controller\OAuth;
 
 use App\Enums\Provider;
+use App\Middleware\Auth;
 use App\Models\User;
 use App\Utils\OAuth;
 use App\Utils\Token;
@@ -34,6 +35,13 @@ class Github extends AbstractController
     { 
         $request = Request::createFromGlobals();
         $state = $request->query->get('state');
+
+        if (Auth::isAuthed()) {
+            if ($state == "") {
+                $state = "home";
+            }
+            return $this->redirectToRoute($state);
+        }
 
         $options = [
         'client_id' => $this->clientID,
