@@ -1,10 +1,8 @@
 <?php
 namespace App\Controller;
 
-use App\Connnections\Mongo;
 use App\Models\Question as AppQuestion;
 use Exception;
-use App\Enums\MongoCollections;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,29 +35,9 @@ class Question extends AbstractController
             );
         }
 
-        $mongo = Mongo::db();
-        if (!$mongo) {
-            return new Response(
-                'internal server error',
-                Response::HTTP_INTERNAL_SERVER_ERROR,
-                [
-                'content-type' => 'application/json'
-                ]
-            );
-        }
-
-        $document = array(
-          'question' => $body['question'],
-          '1' => $body['1'],
-          '2' => $body['2'],
-          '3' => $body['3'],
-          '4' => $body['4']
-        );
-
         try {
-            $docID = $mongo->selectCollection(MongoCollections::QUESTIONS->value)->insertOne($document)->getInsertedId();
             $newQuestion = new AppQuestion;
-            $newQuestion->create($docID);
+            $newQuestion->create($body);
         } catch(Exception $e) {
             return new Response(
                 $e->getMessage(),

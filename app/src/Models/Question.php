@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Connnections\Mongo;
+use App\Enums\MongoCollections;
 use App\Errors\General\InternalServerError;
 use Exception;
 use Fuel\Validation\ResultInterface;
@@ -73,22 +75,44 @@ class Question
     /**
      * Create a new question in the database
      *
-     * @param string docID The document ID of the question in the mongodb database
+     * @param mixed data The data that must be contained with the question
      **/
-    public function create(string $docID): void
+    public function create(mixed $data): void
     {
         try {
+            $mongo = Mongo::db();
+            if (!$mongo) {
+                throw new InternalServerError;
+            }
+
+            $document = array(
+
+            'question' => $data['question'],
+            '1' => $data['1'],
+            '2' => $data['2'],
+            '3' => $data['3'],
+            '4' => $data['4']
+            );
+
+            $docID = $mongo->selectCollection(MongoCollections::QUESTIONS->value)->insertOne($document)->getInsertedId();
+
             $stmt = $this->db->prepare("INSERT INTO questions (doc_id) VALUES (:doc_id)");
             $stmt->execute(
                 [
                 ':doc_id' => $docID
                 ]
             );
-            $stmt->fetch();
+              $stmt->fetch();
         } catch (Exception $e) {
             throw new InternalServerError(message: $e->getMessage());
         }
     }
+
+    /**
+     * Get the question with the given ID from the database
+     *
+     * @param string ID The question ID of the question that needs to be fetched
+     **/
 
     /**
      * Get the ID of the Question
