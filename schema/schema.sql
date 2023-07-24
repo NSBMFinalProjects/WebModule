@@ -10,3 +10,12 @@ CREATE TABLE users (
   provider_id INT NOT NULL,
   PRIMARY KEY(ID)
 );
+
+CREATE TABLE profiles (
+  ID uuid DEFAULT uuid_generate_v4(),
+  user_id uuid NOT NULL UNIQUE,
+  attempted INT NOT NULL DEFAULT 0,
+  correct INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (user_id) REFERENCES users(ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
