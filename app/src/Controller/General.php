@@ -29,4 +29,11 @@ class General extends AbstractController
         include GetRoutes::getPath('/contact');
         return new Response(null, Response::HTTP_OK);
     }
+
+    #[Route(name: 'question')]
+    public function question(): Response
+    {
+        include GetRoutes::getPath('/question');
+        return new Response(null, Response::HTTP_OK);
+    }
 }
