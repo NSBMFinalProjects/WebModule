@@ -9,7 +9,7 @@ use App\Utils\GetRoutes;
 
 class General extends AbstractController
 {
-    #[Route('/', name: 'home')]
+    #[Route(name: 'home')]
     public function home(): Response
     {
         $is_authenticated = Auth::isAuthed();
@@ -23,7 +23,7 @@ class General extends AbstractController
         return new Response(null, Response::HTTP_OK);
     }
 
-    #[Route('/contact', name: 'contact')]
+    #[Route(name: 'contact')]
     public function contact(): Response
     {
         include GetRoutes::getPath('/contact');

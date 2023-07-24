@@ -5,9 +5,11 @@ use App\Middleware\Auth as AppAuth;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class Auth extends AbstractController
 {
+    #[Route(methods: ['GET'])]
     public function logout(Request $req): Response
     {
         if (!$req->isMethod(Request::METHOD_GET)) {

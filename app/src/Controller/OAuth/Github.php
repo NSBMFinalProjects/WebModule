@@ -29,7 +29,7 @@ class Github extends AbstractController
         $this->redirectURL = $_ENV["GITHUB_CALLBACK_URL"];
     }
 
-    #[Route('/oauth/github/redirect', name: 'github_redirect')]
+    #[Route(name: 'github_redirect')]
     public function github(): Response
     { 
         $request = Request::createFromGlobals();
@@ -46,7 +46,7 @@ class Github extends AbstractController
         return $this->redirect($url);
     }
 
-    #[Route('/oauth/github/callback', name: 'github_callback')]
+    #[Route(name: 'github_callback')]
     public function callback(): Response
     {
         $request = Request::createFromGlobals();
