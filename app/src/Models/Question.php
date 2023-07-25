@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Connnections\Mongo;
 use App\Enums\MongoCollections;
+use App\Errors\General\BadRequest;
 use App\Errors\General\InternalServerError;
 use Exception;
 use Fuel\Validation\ResultInterface;
@@ -10,6 +11,7 @@ use Fuel\Validation\Validator;
 use App\Connnections\DB;
 use App\Errors\DB\ConnectionError;
 use PDO;
+use MongoDB\BSON\ObjectId;
 
 class Question
 {
@@ -17,6 +19,8 @@ class Question
     private $docID;
     private $attempts = 0;
     private $correct = 0;
+    private $question;
+    private $answers;
 
     private PDO $db;
 
@@ -111,8 +115,69 @@ class Question
     /**
      * Get the question with the given ID from the database
      *
-     * @param string ID The question ID of the question that needs to be fetched
+     * @param string id The Question ID
      **/
+    public function fetchQuestion(string $id): void
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM questions WHERE id=?");
+            $stmt->execute([$id]);
+            $questionMetadata = $stmt->fetch();
+            if (!$questionMetadata) {
+                throw new BadRequest(message: "Question with the given ID is not found");
+            }
+
+            $this->id = $id;
+            $this->docID = $questionMetadata['doc_id'];
+            $this->attempts = $questionMetadata['attempts'];
+            $this->correct = $questionMetadata['correct'];
+
+            $mongo = Mongo::db();
+            if (!$mongo) {
+                throw new InternalServerError(message: "connection to mongodb failed");
+            }
+
+            $doc = $mongo->selectCollection(MongoCollections::QUESTIONS->value)->findOne(
+                array(
+                '_id' => new ObjectId($this->docID)
+                )
+            );
+
+            try {
+                $this->question = $doc['question'];
+                $this->answers = array(
+                    '1' => $doc['1'],
+                    '2' => $doc['2'],
+                    '3' => $doc['3'],
+                    '4' => $doc['4']
+                );
+            } catch (Exception $e) {
+                throw new InternalServerError(message: "Failed to connect with the database");
+            }
+        } catch(Exception $e) {
+            throw new InternalServerError(message: $e->getMessage());
+        }
+    }
+
+    /**
+     * Get the questions from the questions relational
+     *
+     * @return string
+     **/
+    public function getQuestion(): string
+    {
+        return $this->question;
+    }
+
+    /**
+     * Get the answers of the fetched question
+     *
+     * @return array
+     **/
+    public function getAnswers(): array
+    {
+        return $this->answers;
+    }
 
     /**
      * Get the ID of the Question
