@@ -39,7 +39,7 @@ class Auth extends AbstractController
             Token::decode($_COOKIE['session']);
 
             $user = new User;
-            $user->getUser(username: Token::$sub);
+            $user->fetchUser(username: Token::$sub);
 
             return new Response(
                 json_encode(

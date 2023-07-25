@@ -128,7 +128,7 @@ class User
      * @param ?string id The ID of the user that needs to be fetched
      * @param ?stirng username The username of the user that needs to be fetched
      **/
-    public function getUser(?string $id = null, ?string $username = null): void
+    public function fetchUser(?string $id = null, ?string $username = null): void
     {
         if ($username == null && $id == null) {
             throw new InsufficentData(message: "the username or the id of the user should be provided");
