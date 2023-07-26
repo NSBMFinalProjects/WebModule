@@ -29,3 +29,15 @@ CREATE TABLE questions (
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   PRIMARY KEY (ID)
 );
+
+CREATE TABLE answers (
+  ID uuid DEFAULT uuid_generate_v4(),
+  user_id uuid NOT NULL,
+  question_id uuid NOT NULL,
+  answer INT NOT NULL,
+  answer_delay INT NOT NULL,
+  answered_at TIMESTAMP NOT NULL DEFAULT now(),
+  PRIMARY KEY (ID),
+  FOREIGN KEY (user_id) REFERENCES users(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (question_id) REFERENCES questions(ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
