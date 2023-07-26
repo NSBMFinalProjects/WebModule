@@ -48,3 +48,8 @@ logout-auth:
 create-question:
   path: /api/question/create
   defaults: {_controller: 'App\Controller\Question::create'}
+#
+# Background services
+get-new-question:
+  path: /api/background/question
+  defaults: {_controller: 'App\Controller\Background\Question::getNewQuestion'}
