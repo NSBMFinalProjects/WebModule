@@ -31,6 +31,8 @@ CREATE TABLE questions (
   PRIMARY KEY (ID)
 );
 
+CREATE INDEX idx_questions_displayed ON questions (displayed);
+
 CREATE TABLE answers (
   ID uuid DEFAULT uuid_generate_v4(),
   user_id uuid NOT NULL,
