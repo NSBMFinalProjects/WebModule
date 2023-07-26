@@ -7,6 +7,8 @@ RUN apt-get install -y libpq-dev  zlib1g-dev libzip-dev unzip \
   && docker-php-ext-install pdo pdo_pgsql pgsql \
   && docker-php-ext-install zip
 
+RUN pecl install redis && docker-php-ext-enable redis
+
 RUN pecl install mongodb \
   &&  echo "extension=mongodb.so" > $PHP_INI_DIR/conf.d/mongo.ini
 

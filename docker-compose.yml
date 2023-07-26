@@ -24,5 +24,13 @@ services:
       - postgresDB:/data/postgres
     env_file:
       - ./app/.env
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redisDB:/data
 volumes:
   postgresDB:
+  redisDB:
