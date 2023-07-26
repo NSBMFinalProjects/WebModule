@@ -19,6 +19,7 @@ class Question
     private $docID;
     private $attempts = 0;
     private $correct = 0;
+    private $displayed;
     private $question;
     private $answers;
 
@@ -131,6 +132,7 @@ class Question
             $this->docID = $questionMetadata['doc_id'];
             $this->attempts = $questionMetadata['attempts'];
             $this->correct = $questionMetadata['correct'];
+            $this->displayed = $questionMetadata['attempts'];
 
             $mongo = Mongo::db();
             if (!$mongo) {
@@ -155,6 +157,56 @@ class Question
                 throw new InternalServerError(message: "Failed to connect with the database");
             }
         } catch(Exception $e) {
+            throw new InternalServerError(message: $e->getMessage());
+        }
+    }
+
+    /**
+     * Fetch the question that must be fetched today
+     **/
+    public function fetchTodaysQuestion(): void
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM questions WHERE displayed = false ORDER BY created_at LIMIT 1");
+            $stmt->execute();
+            $questionMetadata = $stmt->fetch();
+            if (!$questionMetadata) {
+                throw new BadRequest("No questions to show");
+            }
+
+            $this->id = $questionMetadata['id'];
+            $this->docID = $questionMetadata['doc_id'];
+            $this->attempts = $questionMetadata['attempts'];
+            $this->correct = $questionMetadata['correct'];
+            $this->displayed = $questionMetadata['attempts'];
+
+            $mongo = Mongo::db();
+            if (!$mongo) {
+                throw new InternalServerError(message: "connection to mongodb failed");
+            }
+
+            $doc = $mongo->selectCollection(MongoCollections::QUESTIONS->value)->findOne(
+                array(
+                '_id' => new ObjectId($this->docID)
+                )
+            );
+
+            try {
+                $this->question = $doc['question'];
+                $this->answers = array(
+                    '1' => $doc['1'],
+                    '2' => $doc['2'],
+                    '3' => $doc['3'],
+                    '4' => $doc['4']
+                );
+            } catch (Exception $e) {
+                throw new InternalServerError(message: "Failed to connect with the database");
+            }
+        } catch(Exception $e) {
+            if ($e->getCode() == 400) {
+                throw new BadRequest(message: $e->getMessage());
+            }
+
             throw new InternalServerError(message: $e->getMessage());
         }
     }
@@ -217,6 +269,16 @@ class Question
     public function getCorrect(): string
     {
         return $this->correct;
+    }
+
+    /**
+     * Check wether a given question is previously displayed or not
+     *
+     * @return bool
+     **/
+    public function getDisplayed(): bool
+    {
+        return $this->displayed;
     }
 
 }
