@@ -28,6 +28,7 @@ CREATE TABLE questions (
   correct INT NOT NULL DEFAULT 0,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   displayed BOOLEAN NOT NULL DEFAULT false,
+  answer INT NOT NULL,
   PRIMARY KEY (ID)
 );
 
