@@ -1,3 +1,3 @@
 <?php
 
-echo "contact us page";
+echo date('Y-m-d');
