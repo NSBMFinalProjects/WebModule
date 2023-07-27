@@ -23,6 +23,7 @@ class Question
     private $displayed;
     private $question;
     private $answers;
+    private $displayed_date;
 
     private PDO $db;
 
@@ -141,6 +142,7 @@ class Question
             $this->correct = $questionMetadata['correct'];
             $this->displayed = $questionMetadata['attempts'];
             $this->answer = $questionMetadata['answer'];
+            $this->displayed_date = $questionMetadata['displayed_date'];
 
             $mongo = Mongo::db();
             if (!$mongo) {
@@ -188,6 +190,24 @@ class Question
             $this->correct = $questionMetadata['correct'];
             $this->displayed = $questionMetadata['attempts'];
             $this->answer = $questionMetadata['answer'];
+            $this->displayed_date = $questionMetadata['displayed_date'];
+
+            if (!$this->displayed_date) {
+                try {
+                    $stmt = $this->db->prepare("UPDATE questions SET displayed_date=:date WHERE id=:id");
+                    $stmt->execute(
+                        [
+                        ':id' => $this->id,
+                        ':date' => date('Y-m-d')
+                        ]
+                    );
+                    $stmt->fetch();
+
+                    $this->displayed_date = date('Y-m-d');
+                } catch (Exception $e) {
+                    throw new InternalServerError(message: $e->getMessage());
+                }
+            }
 
             $mongo = Mongo::db();
             if (!$mongo) {
@@ -228,7 +248,7 @@ class Question
     public function markQuestionAsDisplayed(string $id): void
     {
         try {
-            $stmt = $this->db->prepare('update questions set displayed = true where id=?');
+            $stmt = $this->db->prepare('UPDATE questions SET displayed = true WHERE id=?');
             $stmt->execute([$id]);
             $stmt->fetch();
         } catch (Exception $e) {
@@ -315,5 +335,4 @@ class Question
     {
         return $this->displayed;
     }
-
 }
