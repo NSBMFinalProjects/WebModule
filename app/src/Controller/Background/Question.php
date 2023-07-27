@@ -43,21 +43,6 @@ class Question extends AbstractController
             try {
                 $question->markQuestionAsDisplayed($today);
             } catch (Exception $e) {
-                if ($e->getCode() == 400) {
-                    return new Response(
-                        $e->getMessage(),
-                        Response::HTTP_BAD_REQUEST,
-                        [
-                        'content-type' => 'application/json'
-                        ]
-                    );
-                }
-
-                return new Response(
-                    $e->getMessage(),
-                    Response::HTTP_OK,
-                    ['content-type' => 'application/json']
-                );
             }
         }
 
