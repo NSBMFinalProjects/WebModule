@@ -13,12 +13,13 @@ class Question extends AbstractController
     #[Route(name: 'create-question')]
     public function create(Request $req): Response
     {
+       
         if (!$req->isMethod(Request::METHOD_POST)) {
             return new Response(
                 'method not allowed',
                 Response::HTTP_METHOD_NOT_ALLOWED,
                 [
-                'content-type' => 'application/json'
+                  'content-type' => 'application/json'
                 ]
             );
         }
@@ -27,10 +28,10 @@ class Question extends AbstractController
         $result = AppQuestion::validate($body);
         if (!$result->isValid()) {
             return new Response(
-                json_encode($result->getErrors()),
+                'bad request',
                 Response::HTTP_BAD_REQUEST,
                 [
-                'content-type' => 'application/json'
+                  'content-type' => 'application/json'
                 ]
             );
         }
