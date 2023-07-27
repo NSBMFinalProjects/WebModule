@@ -29,6 +29,7 @@ CREATE TABLE questions (
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   displayed BOOLEAN NOT NULL DEFAULT false,
   answer INT NOT NULL,
+  displayed_date DATE,
   PRIMARY KEY (ID)
 );
 
