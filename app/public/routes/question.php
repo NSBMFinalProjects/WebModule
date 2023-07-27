@@ -18,6 +18,7 @@ if ($today != "") {
 
 try {
     $question->fetchTodaysQuestion();
+    /* $redis->set('today', $question->getID()); */
 } catch (Exception $e) {
     echo "Something went wrong";
     return;
