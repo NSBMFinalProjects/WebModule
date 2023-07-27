@@ -212,6 +212,22 @@ class Question
     }
 
     /**
+     * Mark the given question as displayed in the database
+     *
+     * @param string id The ID of the question that should be marked as displayed
+     **/
+    public function markQuestionAsDisplayed(string $id): void
+    {
+        try {
+            $stmt = $this->db->prepare('update questions set displayed = true where id=?');
+            $stmt->execute([$id]);
+            $stmt->fetch();
+        } catch (Exception $e) {
+            throw new InternalServerError(message: $e->getMessage());
+        }
+    }
+
+    /**
      * Get the questions from the questions relational
      *
      * @return string
