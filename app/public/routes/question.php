@@ -7,22 +7,18 @@ $redis = RedisDB::connect();
 $question = new Question();
 
 $today = $redis->get('today');
-if ($today != "") {
-    try {
-        $question->markQuestionAsDisplayed($today);
-    } catch (Exception $e) {
-        echo "Something went wrong";
-        return;
-    }
+if ($today == "") {
+    echo "There is no question for display today";
+    return;
 }
 
 try {
-    $question->fetchTodaysQuestion();
-    /* $redis->set('today', $question->getID()); */
+    $question->fetchQuestion($today);
 } catch (Exception $e) {
     echo "Something went wrong";
     return;
 }
+
 ?>
 
 <!DOCTYPE html>
