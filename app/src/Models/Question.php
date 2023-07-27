@@ -19,6 +19,7 @@ class Question
     private $docID;
     private $attempts = 0;
     private $correct = 0;
+    private $answer;
     private $displayed;
     private $question;
     private $answers;
@@ -71,7 +72,13 @@ class Question
 
             ->required()
             ->minLength(4)
-            ->maxLength(200);
+            ->maxLength(200)
+
+            ->addField("answer", "answer")
+
+            ->required()
+            ->number();
+          
 
         $result = $v->run($data);
         return $result;
@@ -91,23 +98,23 @@ class Question
             }
 
             $document = array(
-
-            'question' => $data['question'],
-            '1' => $data['1'],
-            '2' => $data['2'],
-            '3' => $data['3'],
-            '4' => $data['4']
+              'question' => $data['question'],
+              '1' => $data['1'],
+              '2' => $data['2'],
+              '3' => $data['3'],
+              '4' => $data['4']
             );
 
             $docID = $mongo->selectCollection(MongoCollections::QUESTIONS->value)->insertOne($document)->getInsertedId();
 
-            $stmt = $this->db->prepare("INSERT INTO questions (doc_id) VALUES (:doc_id)");
+            $stmt = $this->db->prepare("INSERT INTO questions (doc_id, answer) VALUES (:doc_id, :answer)");
             $stmt->execute(
                 [
-                ':doc_id' => $docID
+                  ':doc_id' => $docID,
+                  ':answer' => $data['answer']
                 ]
             );
-              $stmt->fetch();
+            $stmt->fetch();
         } catch (Exception $e) {
             throw new InternalServerError(message: $e->getMessage());
         }
@@ -133,6 +140,7 @@ class Question
             $this->attempts = $questionMetadata['attempts'];
             $this->correct = $questionMetadata['correct'];
             $this->displayed = $questionMetadata['attempts'];
+            $this->answer = $questionMetadata['answer'];
 
             $mongo = Mongo::db();
             if (!$mongo) {
@@ -179,6 +187,7 @@ class Question
             $this->attempts = $questionMetadata['attempts'];
             $this->correct = $questionMetadata['correct'];
             $this->displayed = $questionMetadata['attempts'];
+            $this->answer = $questionMetadata['answer'];
 
             $mongo = Mongo::db();
             if (!$mongo) {
@@ -245,6 +254,16 @@ class Question
     public function getAnswers(): array
     {
         return $this->answers;
+    }
+
+    /**
+     * Get the correct answer for the given question
+     *
+     * @return int
+     **/
+    public function getCorectAnswer(): int
+    {
+        return $this->answer;
     }
 
     /**

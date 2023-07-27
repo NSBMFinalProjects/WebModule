@@ -43,7 +43,7 @@ class Question extends AbstractController
                 $e->getMessage(),
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 [
-                'content-type' => 'application/json'
+                  'content-type' => 'application/json'
                 ]
             );
         }
@@ -52,7 +52,7 @@ class Question extends AbstractController
             'success',
             Response::HTTP_OK,
             [
-            'content-type' => 'application/json'
+              'content-type' => 'application/json'
             ]
         );
     }
