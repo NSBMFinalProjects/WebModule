@@ -193,17 +193,16 @@ class Question
             $this->displayed_date = $questionMetadata['displayed_date'];
 
             if (!$this->displayed_date) {
+                $this->displayed_date = time();
                 try {
                     $stmt = $this->db->prepare("UPDATE questions SET displayed_date=:date WHERE id=:id");
                     $stmt->execute(
                         [
                         ':id' => $this->id,
-                        ':date' => date('Y-m-d')
+                        ':date' => $this->displayed_date,
                         ]
                     );
                     $stmt->fetch();
-
-                    $this->displayed_date = date('Y-m-d');
                 } catch (Exception $e) {
                     throw new InternalServerError(message: $e->getMessage());
                 }
@@ -334,5 +333,15 @@ class Question
     public function getDisplayed(): bool
     {
         return $this->displayed;
+    }
+
+    /**
+     * Get the dispalyed date of the question
+     *
+     * @return int
+     **/
+    public function getDisplayedDate(): int
+    {
+        return $this->displayed_date;
     }
 }
