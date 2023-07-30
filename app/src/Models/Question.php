@@ -17,6 +17,7 @@ class Question
 {
     private $id = null;
     private $docID;
+    private $title;
     private $attempts = 0;
     private $correct = 0;
     private $answer;
@@ -45,6 +46,12 @@ class Question
         $v = new Validator;
 
         $v
+            ->addField("title", "title")
+
+            ->required()
+            ->minLength(5)
+            ->maxLength(100)
+
             ->addField("question", "question")
 
             ->required()
@@ -99,6 +106,7 @@ class Question
             }
 
             $document = array(
+              'title' => $data['title'],
               'question' => $data['question'],
               '1' => $data['1'],
               '2' => $data['2'],
@@ -108,9 +116,10 @@ class Question
 
             $docID = $mongo->selectCollection(MongoCollections::QUESTIONS->value)->insertOne($document)->getInsertedId();
 
-            $stmt = $this->db->prepare("INSERT INTO questions (doc_id, answer) VALUES (:doc_id, :answer)");
+            $stmt = $this->db->prepare("INSERT INTO questions (title, doc_id, answer) VALUES (:title, :doc_id, :answer)");
             $stmt->execute(
                 [
+                  ':title' => $data['title'],
                   ':doc_id' => $docID,
                   ':answer' => $data['answer']
                 ]
@@ -138,6 +147,7 @@ class Question
 
             $this->id = $id;
             $this->docID = $questionMetadata['doc_id'];
+            $this->title = $questionMetadata['title'];
             $this->attempts = $questionMetadata['attempts'];
             $this->correct = $questionMetadata['correct'];
             $this->displayed = $questionMetadata['attempts'];
@@ -186,6 +196,7 @@ class Question
 
             $this->id = $questionMetadata['id'];
             $this->docID = $questionMetadata['doc_id'];
+            $this->title = $questionMetadata['title'];
             $this->attempts = $questionMetadata['attempts'];
             $this->correct = $questionMetadata['correct'];
             $this->displayed = $questionMetadata['attempts'];
@@ -253,6 +264,16 @@ class Question
         } catch (Exception $e) {
             throw new InternalServerError(message: $e->getMessage());
         }
+    }
+
+    /**
+     * Get the title of the question
+     *
+     * @return string
+     **/
+    public function getTitle(): string
+    {
+        return $this->title;
     }
 
     /**
