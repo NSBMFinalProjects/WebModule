@@ -103,7 +103,6 @@ class Question extends AbstractController
         }
 
         try {
-          
             $redis = RedisDB::connect();
             $db = DB::db();
 
@@ -157,17 +156,21 @@ class Question extends AbstractController
             $stmt->execute(
                 [
                 ':user_id' => $user->getID(),
-                ':question_id' => $today,
+                ':question_id' => $question->getID(),
                 ':answer' => $body['answer'],
                 ':answer_delay' => $delay,
-                ':is_correct' => $isCorrect,
+                ':is_correct' => $isCorrect ? "YES" : "NO"
                 ]
             );
             $stmt->fetch();
 
         } catch(Exception $e) {
             return new Response(
-                $e->getMessage(),
+                json_encode(
+                    [
+                    'error' => $e->getMessage(),
+                    ]
+                ),
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ['content-type' => 'application/json']
             );
