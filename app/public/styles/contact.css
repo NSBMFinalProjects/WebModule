@@ -1,0 +1,66 @@
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  width: 40vw;
+  max-width: 40vw;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 3em;
+}
+
+#desc {
+  margin-top: -20px;
+  color: #646464;
+  font-weight: 300;
+  font-size: 0.8em;
+}
+
+form input,
+form textarea {
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 15px;
+  border: 1px solid #efefef;
+  font-size: 0.8em;
+  resize: vertical;
+}
+
+form textarea {
+  font-size: 1em;
+}
+
+form input::placeholder,
+form textarea::placeholder {
+  color: silver;
+}
+
+form button {
+  width: max-content;
+  height: 50px;
+  color: white;
+  border: none;
+  background-color: #05ce91;
+  padding: 10px;
+}
+
+.error {
+  display: none;
+  margin-top: -0.5em;
+  color: red;
+  text-align: left;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
