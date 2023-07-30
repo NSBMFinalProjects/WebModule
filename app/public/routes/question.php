@@ -1,7 +1,9 @@
 <?php
 
+
 use App\Connnections\DB;
 use App\Models\User;
+use App\Utils\GetRoutes;
 use App\Utils\Token;
 
 
@@ -17,12 +19,13 @@ $today = RedisDB::connect()->get('today');
   <!DOCTYPE html>
   <html lang="en">
     <head>
-      <title>Leaderboard</title>
+      <title>Question</title>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
+      <?php include GetRoutes::getPath('/navbar'); ?>
       <main class="flex flex-col justify-center items-center min-h-screen">
         <h1 class="text-4xl font-bold">No question for today</h1>
         <p class="mt-4 text-gray-400">Please come back tommorow ...</p>
@@ -41,14 +44,15 @@ $today = RedisDB::connect()->get('today');
     <!DOCTYPE html>
     <html lang="en">
       <head>
-        <title>Leaderboard</title>
+        <title>Question</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="./public/styles/question.css" />
       </head>
 
-      <body class="flex flex-col items-center justify-center min-h-screen bg-[#FBFBFB]">
+      <body class="flex flex-col items-center justify-center min-h-screen bg-[#FBFBFB] mt-16">
+        <?php include GetRoutes::getPath('/navbar'); ?>
         <main class="container py-8 mx-auto bg-[#FBFBFB]">
           <div class="p-16 mx-auto max-w-7xl bg-white rounded-lg shadow">
             <h1 class="mb-4 text-3xl font-bold">
@@ -93,7 +97,7 @@ $today = RedisDB::connect()->get('today');
                           type="button"
                           class="py-3 px-6 mt-6 w-full font-semibold text-white bg-[#0DCBF6] rounded-lg shadow-md transition-colors hover:bg-[#00C9F6]"
                         >
-                        <a href="/leaderboard">Alreay submited, Check the leaderboard !</a>
+                        <a href="/leaderboard">Already submited, Check the leaderboard !</a>
                         </button>
                     <?php else: ?>
                         <button

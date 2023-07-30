@@ -29,6 +29,12 @@ login:
 admin:
   path: /admin
   defaults: {_controller: 'App\Controller\Admin::admin'}
+pastquestions:
+  path: /past-questions
+  defaults: {_controller: 'App\Controller\General::pastQuestions'}
+about:
+  path: /about
+  defaults: {_controller: 'App\Controller\General::about'}
 #
 # OAuth paths
 #

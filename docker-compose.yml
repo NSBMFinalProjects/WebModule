@@ -31,6 +31,17 @@ services:
       - '6379:6379'
     volumes:
       - redisDB:/data
+  mongo:
+    image: mongo
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - 27017:27017
+    volumes:
+      - mongoDB:/data/db
 volumes:
   postgresDB:
   redisDB:
+  mongoDB:

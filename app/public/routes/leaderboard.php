@@ -1,4 +1,7 @@
 <?php
+
+use App\Utils\GetRoutes;
+
 use App\Connnections\DB;
 
 $db = DB::db();
@@ -18,6 +21,7 @@ $results = $stmt->fetchAll();
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
+    <?php require GetRoutes::getPath('/navbar'); ?>
     <main
       class="flex flex-col justify-center items-center min-h-screen bg-[#FBFBFB]"
     >

@@ -105,4 +105,24 @@ class General extends AbstractController
         include GetRoutes::getPath('/leaderboard');
         return new Response(null, Response::HTTP_OK);
     }
+
+    #[Route(name: 'past-questions')]
+    public function pastQuestions(Request $req): Response
+    {
+        $id = $req->query->get("id");
+        if (!$id) {
+            include GetRoutes::getPath('/pastquestions');
+            return new Response(null, Response::HTTP_OK);
+        }
+
+        include GetRoutes::getPath('/old-question');
+        return new Response(null, Response::HTTP_OK);
+    }
+
+    #[Route(name: 'about')]
+    public function about(): Response
+    {
+        include GetRoutes::getPath('/about');
+        return new Response(null, Response::HTTP_OK);
+    }
 }

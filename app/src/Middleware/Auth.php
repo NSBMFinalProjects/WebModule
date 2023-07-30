@@ -25,11 +25,12 @@ class Auth
 
         return true;
     }
-        /**
-         * A middleware to check wether the user is the admin
-         *
-         * @return bool
-         **/
+
+    /**
+     * A middleware to check wether the user is the admin
+     *
+     * @return bool
+     **/
     public static function isAdmin(): bool
     {
         if (!self::isAuthed()) {
@@ -45,5 +46,4 @@ class Auth
         $user = new User;
         return $user->getAdminStatus(Token::$sub);
     }
-
 }

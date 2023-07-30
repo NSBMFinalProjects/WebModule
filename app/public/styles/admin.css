@@ -1,0 +1,75 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "poppins", sans-serif, Arial, Helvetica;
+  background-color: #d1eff8;
+}
+
+.Qform {
+  top: 150px;
+  position: relative;
+  font-size: 24px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 90%;
+  border: 0px solid #ddd;
+  margin-left: 5%;
+}
+
+th {
+  float: left;
+  text-align: left;
+  padding-left: 20px;
+}
+td {
+  padding-left: 20px;
+}
+
+textarea {
+  width: 90%;
+  max-width: 90%;
+  height: auto;
+  border-radius: 10px;
+  border: 0px solid;
+  cursor: pointer;
+}
+
+#button4 {
+  float: left;
+  padding: 10px;
+  margin-left: 15%;
+  background-color: rgb(227, 250, 203);
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: "poppins";
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#button4:hover {
+  background-color: rgb(183, 243, 252);
+  border-width: thick;
+}
+
+#submit {
+  float: right;
+  padding: 10px;
+  margin-right: 15%;
+  background-color: rgb(227, 250, 203);
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: "poppins";
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#submit:hover {
+  background-color: chartreuse;
+  border-width: thick;
+}
