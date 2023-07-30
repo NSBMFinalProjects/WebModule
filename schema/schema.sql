@@ -23,6 +23,7 @@ CREATE TABLE profiles (
 
 CREATE TABLE questions (
   ID uuid DEFAULT uuid_generate_v4(),
+  title VARCHAR(100) NOT NULL,
   doc_id VARCHAR(30) NOT NULL UNIQUE,
   attempts INT NOT NULL DEFAULT 0,
   correct INT NOT NULL DEFAULT 0,
