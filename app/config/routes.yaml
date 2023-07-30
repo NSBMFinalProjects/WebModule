@@ -17,6 +17,9 @@ contact:
 question:
   path: /question
   defaults: {_controller: 'App\Controller\General::question'}
+leaderboard:
+  path: '/leaderboard'
+  defaults: {_controller: 'App\Controller\General::leaderboard'}
 logout:
   path: /logout
   defaults: {_controller: 'App\Controller\Auth::logout'}

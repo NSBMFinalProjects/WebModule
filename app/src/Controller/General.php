@@ -98,4 +98,11 @@ class General extends AbstractController
         include GetRoutes::getPath('/question');
         return new Response(null, Response::HTTP_OK);
     }
+
+    #[Route(name: 'leaderboard')]
+    public function leaderboard(): Response
+    {
+        include GetRoutes::getPath('/leaderboard');
+        return new Response(null, Response::HTTP_OK);
+    }
 }
