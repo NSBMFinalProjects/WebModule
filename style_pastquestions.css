@@ -5,12 +5,7 @@ body {
   margin: 0;
   font-family: 'poppins',Arial, Helvetica, sans-serif;
   margin-block-start: 0%;
-  background-image: url("group/pastback.webp");
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-blend-mode: hue;
+
 }
 
 #navbar {
