@@ -47,3 +47,7 @@ CREATE TABLE answers (
   FOREIGN KEY (user_id) REFERENCES users(ID) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (question_id) REFERENCES questions(ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE INDEX idx_user_answered_questions ON answers (user_id);
+CREATE INDEX idx_question_shown ON answers (question_id);
+CREATE INDEX answer_delay ON answers_delay (answer_delay);
