@@ -1,5 +1,4 @@
 <?php
-
 use App\Connnections\DB;
 
 $db = DB::db();
@@ -20,7 +19,7 @@ $results = $stmt->fetchAll();
   </head>
   <body>
     <main
-      class="flex flex-col justify-center items-center min-h-screen bg-[#FEF8F8]"
+      class="flex flex-col justify-center items-center min-h-screen bg-[#FBFBFB]"
     >
       <div
         class="container pt-20 pr-16 pb-20 pl-16 mx-auto bg-white border-2 border-white border-solid w-[700px]"
