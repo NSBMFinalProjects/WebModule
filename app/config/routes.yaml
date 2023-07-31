@@ -26,6 +26,9 @@ logout:
 login:
   path: /login
   defaults: {_controller: 'App\Controller\OAuth\Github::github'}
+admin:
+  path: /admin
+  defaults: {_controller: 'App\Controller\Admin::admin'}
 #
 # OAuth paths
 #
