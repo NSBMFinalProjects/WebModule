@@ -40,7 +40,10 @@ $results = $stmt->fetchAll();
             <?php foreach ($results as $index=>$result) : ?>
               <tr class="mt-16">
               <td class="text-left"><?php echo $index + 1; ?></td>
-                <td class="text-left"><?php echo $result['display_name'] . ' (' . $result['username'] . ')' ; ?></td>
+              <td class="text-left flex gap-4">
+                <img src=<?php echo $result['photo_url']; ?> class="w-6 rounded-full" />
+                <?php echo $result['display_name'] . ' (' . $result['username'] . ')' ; ?>
+              </td>
               </tr>
             <?php endforeach; ?>
           </tbody>
