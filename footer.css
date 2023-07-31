@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+footer {
+    background-color: #fefefe; 
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+/* Style for the social icons */
+.social-icons {
+    text-align: center;
+}
+
+.social-icons .icon-link {
+    display: inline-block;
+    margin: 0 10px;
+    /* Change the background color to your desired shade of green */
+    color: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 20px;
+    transition: background-color 0.3s;
+}
+
+.social-icons .icon-link:hover {
+    background-color: #3f4433; /* Change the hover background color to a darker shade of green or any other color you prefer */
+}
+
+/* Other styles for the footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+
+
+/* Existing styles for social icons */
+.social-icons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.icon-item {
+    display: inline-block;
+    margin: 0 20px; /* Adjust the distance between the icons */
+    text-align: center;
+}
+
+.social-icons .icon-link {
+    color: #e8e2e2;
+    font-size: 24px;
+}
+
+/* New styles for contact information */
+.contact-info {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contact-info .contact-item {
+    display: inline-block;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.contact-info .contact-item .icon-link {
+    color: #eadbdb;
+    font-size: 24px;
+}
+
+.contact-info .contact-item p {
+    margin: 0px;
+}
+
+.contact-info .contact-item p a {
+    color: #f9f1f1;
+}
+
+/* Adjust spacing for smaller screens */
+@media screen and (max-width: 768px) {
+    .icon-item,
+    .contact-info .contact-item {
+        flex-direction: row;
+        display: block;
+        margin: 10px auto; /* Adjust spacing for smaller screens */
+    }
+}
+
+
+
