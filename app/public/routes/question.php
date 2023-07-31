@@ -14,21 +14,21 @@ $today = RedisDB::connect()->get('today');
 ?>
 
 <?php if($today == "") : ?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Leaderboard</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
-    <main class="flex flex-col justify-center items-center min-h-screen">
-      <h1 class="text-4xl font-bold">No question for today</h1>
-      <p class="mt-4 text-gray-400">Please come back tommorow ...</p>
-    </main>
-  </body>
-</html>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <title>Leaderboard</title>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+      <main class="flex flex-col justify-center items-center min-h-screen">
+        <h1 class="text-4xl font-bold">No question for today</h1>
+        <p class="mt-4 text-gray-400">Please come back tommorow ...</p>
+      </main>
+    </body>
+  </html>
 
 
 
