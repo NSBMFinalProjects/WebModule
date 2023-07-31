@@ -1,9 +1,6 @@
-body{
-    margin: 0;
-    padding: 0;
-}
-* {box-sizing: border-box;}
 
+* {box-sizing: border-box;}
+/*navbar*/
 body { 
   margin: 25px;
   padding-top: 70px;
@@ -15,7 +12,7 @@ body {
   background-color:none;
   padding: 30px 10px;
   transition: 0.4s;
-  position: fixed;
+ 
   width: 100%;
   top: 0;
   z-index: 99;
@@ -78,14 +75,25 @@ body {
     float: none;
   }
 }
+/*end of the navbar*/
 
+
+/*the body section*/
 .contenet{
     max-width: 2000px;
     padding: 0 20px;
     margin: 0 auto;
 }
 
-
+.image-container {
+    width: 100%;
+    height: 400px;
+    background-image: url("nsbm.jpg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    margin-top: 10px;
+  }
 
 
 table {
@@ -97,24 +105,14 @@ table, th, td {
     padding: 20px;
     margin: 30px;
   }
-  .image-container {
-    width: 100%;
-    height: 400px;
-    background-image: url("nsbm.jpg.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    border-radius: 15px;
-    
-    
-  }
-
+ 
 .theimage{
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 0px solid #ccc;
     border-radius: 15px;
 
 }
@@ -127,7 +125,7 @@ table, th, td {
 
 #vision-container {
     margin-top: 20px; 
-    padding: 10px; 
+    padding: 20px; 
     background-color: #f2f2f2;
     border: 1px solid #ccc;
     border-radius: 15px;
@@ -136,6 +134,9 @@ table, th, td {
     align-items: center;
     justify-content: center;
     text-align: center;
+    margin-bottom: 20px;
+    width: 1000px;
+    height: 300px;
 }
 #vision-container h4 {
     font-size: 18px;
@@ -146,10 +147,10 @@ table, th, td {
     font-size: 16px; 
     font-family: Arial, sans-serif;
 }
+/*end of the body section*/
 
 
-
-
+/*ststating the footer section*/
 body {
     margin: 0;
     padding: 0;
@@ -188,9 +189,6 @@ footer {
     text-align: center;
 }
 
-
-
-
 .social-icons {
     text-align: center;
     margin-top: 20px;
@@ -224,7 +222,7 @@ footer {
 }
 
 .contact-info .contact-item p {
-    margin: 0px;
+    margin: 10px;
 }
 
 .contact-info .contact-item p a {
@@ -240,6 +238,6 @@ footer {
         margin: 10px auto; 
     }
 }
-
+/*ending the foooter section*/
 
 
