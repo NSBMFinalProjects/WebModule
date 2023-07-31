@@ -8,7 +8,7 @@ footer {
     padding: 20px;
     text-align: center;
 }
-/* Style for the social icons */
+
 .social-icons {
     text-align: center;
 }
@@ -16,7 +16,7 @@ footer {
 .social-icons .icon-link {
     display: inline-block;
     margin: 0 10px;
-    /* Change the background color to your desired shade of green */
+    
     color: #fff;
     border-radius: 50%;
     padding: 10px;
@@ -25,10 +25,10 @@ footer {
 }
 
 .social-icons .icon-link:hover {
-    background-color: #3f4433; /* Change the hover background color to a darker shade of green or any other color you prefer */
+    background-color: #3f4433; 
 }
 
-/* Other styles for the footer */
+
 footer {
     background-color: #333;
     color: #fff;
@@ -38,7 +38,7 @@ footer {
 
 
 
-/* Existing styles for social icons */
+
 .social-icons {
     text-align: center;
     margin-top: 20px;
@@ -46,7 +46,7 @@ footer {
 
 .icon-item {
     display: inline-block;
-    margin: 0 20px; /* Adjust the distance between the icons */
+    margin: 0 20px;
     text-align: center;
 }
 
@@ -55,7 +55,6 @@ footer {
     font-size: 24px;
 }
 
-/* New styles for contact information */
 .contact-info {
     text-align: center;
     margin-top: 20px;
@@ -80,13 +79,13 @@ footer {
     color: #f9f1f1;
 }
 
-/* Adjust spacing for smaller screens */
+
 @media screen and (max-width: 768px) {
     .icon-item,
     .contact-info .contact-item {
         flex-direction: row;
         display: block;
-        margin: 10px auto; /* Adjust spacing for smaller screens */
+        margin: 10px auto; 
     }
 }
 
