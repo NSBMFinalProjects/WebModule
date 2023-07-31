@@ -1,6 +1,7 @@
 <?php
 namespace App\Middleware;
 
+use App\Models\User;
 use App\Utils\Token;
 
 class Auth
@@ -24,4 +25,25 @@ class Auth
 
         return true;
     }
+        /**
+         * A middleware to check wether the user is the admin
+         *
+         * @return bool
+         **/
+    public static function isAdmin(): bool
+    {
+        if (!self::isAuthed()) {
+            return false;
+        }
+
+        $session = $_COOKIE['session'];
+        $verified = Token::decode($session);
+        if (!$verified) {
+            return false;
+        }
+
+        $user = User;
+        return $user->getAdminStatus(Token::$sub);
+    }
+
 }

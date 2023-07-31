@@ -22,6 +22,7 @@ class User
     private $photo_url;
     private $provider;
     private $provider_id;
+    private $isAdmin;
 
     private PDO $db;
 
@@ -165,6 +166,7 @@ class User
         $this->email = $user['email'];
         $this->provider = $user['provider'];
         $this->provider = $user['provider_id'];
+        $this->isAdmin = $user['is_admin'];
 
         return;
 
@@ -210,6 +212,23 @@ class User
 
             throw new InternalServerError(message: $e->getMessage());
         }
+    }
+
+    /**
+     * Check wether the user of the given username is admin or not
+     *
+     * @return bool
+     **/
+    public function getAdminStatus(string $username): bool
+    {
+        $stmt = $this->db->prepare("SELECT is_admin FROM users WHERE username=?");
+        $stmt->execute([$username]);
+        $result = $stmt->fetch();
+        if (!$result) {
+            return false;
+        }
+
+        return $result['is_admin'];
     }
 
     /**
@@ -281,5 +300,15 @@ class User
     public function getProviderID(): int
     {
         return $this->provider_id;
+    }
+
+    /**
+     * Get wether the user is a admin or not
+     *
+     * @return bool
+     **/
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
     }
 }
