@@ -29,6 +29,14 @@ class Question extends AbstractController
                 ]
             );
         }
+
+        if (!Auth::isAdmin()) {
+            return new Response(
+                'unauthorized',
+                Response::HTTP_UNAUTHORIZED,
+                ['content-type' => 'application/json']
+            );
+        }
         $body = json_decode($req->getContent(), true);
 
         $result = AppQuestion::validate($body);
