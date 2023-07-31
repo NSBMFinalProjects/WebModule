@@ -42,7 +42,7 @@ class Auth
             return false;
         }
 
-        $user = User;
+        $user = new User;
         return $user->getAdminStatus(Token::$sub);
     }
 
