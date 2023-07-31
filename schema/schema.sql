@@ -9,6 +9,7 @@ CREATE TABLE users (
   provider VARCHAR(50) NOT NULL,
   provider_id INT NOT NULL,
   joined_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  is_admin BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY(ID)
 );
 
