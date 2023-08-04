@@ -67,7 +67,7 @@ class Github extends AbstractController
         }
 
         if ($state == "") {
-            $state = $_ENV["DOMAIN"];
+            $state = 'http://' . $_ENV["DOMAIN"];
         }
 
         $access_token = OAuth::getGithubAccessToken($this->clientID, $this->clientSecret, $state, $code);
@@ -105,7 +105,7 @@ class Github extends AbstractController
             value: $jwt,
             expire: 0,
             path: '/',
-            domain: 'localhost',
+            domain: $_ENV["DOMAIN"],
             secure: false,
             httpOnly: true
         );
