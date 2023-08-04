@@ -77,7 +77,7 @@ use App\Middleware\Auth;
     <a href="/question">Question page</a>
     <a href="past-questions">Past Question</a>
     <a href="/leaderboard">Leadboard</a>
-    <a href="About us.html">Aboutus</a>
+    <a href="/about">Aboutus</a>
     <a href="/contact">Contact us</a>
     <?php if(Auth::isAdmin()) : ?>
         <a href="/admin">Admin</a>
