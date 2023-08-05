@@ -50,37 +50,37 @@ class Question
 
             ->required()
             ->minLength(5)
-            ->maxLength(1000)
+            ->maxLength(2000)
 
             ->addField("question", "question")
 
             ->required()
             ->minLength(20)
-            ->maxLength(1000)
+            ->maxLength(2000)
 
             ->addField("1", "1")
 
             ->required()
             ->minLength(4)
-            ->maxLength(1000)
+            ->maxLength(2000)
 
             ->addField("2", "2")
 
             ->required()
             ->minLength(4)
-            ->maxLength(1000)
+            ->maxLength(2000)
 
             ->addField("3", "3")
 
             ->required()
             ->minLength(4)
-            ->maxLength(1000)
+            ->maxLength(2000)
 
             ->addField("4", "4")
 
             ->required()
             ->minLength(4)
-            ->maxLength(1000)
+            ->maxLength(2000)
 
             ->addField("answer", "answer")
 
