@@ -98,7 +98,9 @@ use App\Middleware\Auth;
         }
         ?>
 
-  <img src=<?php echo $user->getPhotoURL() ?> style="border-radius: 50%;" width="45px"/>
+        <a href="/logout">
+          <img src=<?php echo $user->getPhotoURL() ?> style="border-radius: 50%;" width="45px"/>
+        </a>
     <?php else: ?>
         <a href="/login">Login</a>
     <?php endif; ?>
